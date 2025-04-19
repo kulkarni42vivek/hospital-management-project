@@ -1,4 +1,9 @@
 const doctorId = localStorage.getItem("doctor");
+const loginForm = document.getElementById("btn-add-login");
+
+loginForm.addEventListener("click", () => {
+  window.location.href = "index.html";
+});
 
 async function loadAppointments() {
   try {
