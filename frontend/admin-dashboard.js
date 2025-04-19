@@ -28,6 +28,7 @@ document.getElementById("doctorForm").addEventListener("submit", async (e) => {
   const doctor = {
     doctorId: document.getElementById("doctorId").value,
     doctorName: document.getElementById("doctorName").value,
+    password: document.getElementById("password").value,
   };
 
   try {

@@ -43,7 +43,7 @@ public class AppointmentController {
 			checkStmt.setString(1, doctor.getDoctorId());
 			ResultSet rs = checkStmt.executeQuery();
 			if (rs.next() && rs.getInt(1) > 0) {
-				return ResponseEntity.ok("Doctor already exists.");
+				return ResponseEntity.ok("User already exists.");
 			}
 
 			// Insert into doctor table

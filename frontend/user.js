@@ -55,7 +55,12 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     if (response.ok) {
       alert(result.message + "\nWelcome, " + result.user.firstName + "!");
-      window.location.href = "admin-dashboard.html";
+      if (result.user.role == "ADMIN") {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        window.location.href = "doctor.html";
+        localStorage.setItem("doctor", result.user.userId);
+      }
     } else {
       alert(result.message);
     }

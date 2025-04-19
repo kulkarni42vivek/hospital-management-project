@@ -45,7 +45,7 @@ public class UserController {
 	        );
 	        stmt.setString(1, user.getUserId());
 	        stmt.setString(2, user.getPassword());
-	        stmt.setString(3, user.getRole());
+	        stmt.setString(3, "ADMIN");
 	        stmt.setString(4, user.getFirstName());
 	        stmt.setString(5, user.getLastName());
 
