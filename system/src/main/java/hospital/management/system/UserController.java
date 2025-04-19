@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import hospital.management.system.models.Users;
 
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin(origins = "*")
 public class UserController {
 	
 	private static final String URL = "jdbc:mysql://localhost:3306/hospital";
@@ -55,8 +59,11 @@ public class UserController {
 	}
 
 	
+
 	@PostMapping("/login")
-	public String authenticateUser(@RequestBody Users request) {
+	public ResponseEntity<Map<String, Object>> authenticateUser(@RequestBody Users request) {
+	    Map<String, Object> response = new HashMap<>();
+
 	    try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
 	        PreparedStatement stmt = conn.prepareStatement(
 	                "SELECT * FROM users WHERE userId = ? AND password = ?"
@@ -66,37 +73,26 @@ public class UserController {
 
 	        ResultSet rs = stmt.executeQuery();
 	        if (rs.next()) {
-	            return " Login successful. Welcome, " + rs.getString("firstName") + "!";
-	        } else {
-	            return " Invalid userId or password.";
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "Error occurred during login.";
-	    }
-	}
-	
-	@GetMapping("getUserData/{userId}")
-	public Users getUserById(@PathVariable int userId) {
-	    Users user = null;
-	    try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
-	        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE userId = ?");
-	        stmt.setInt(1, userId);
-	        ResultSet rs = stmt.executeQuery();
+	            Map<String, Object> userData = new HashMap<>();
+	            userData.put("userId", rs.getString("userId"));
+	            userData.put("firstName", rs.getString("firstName"));
+	            userData.put("lastName", rs.getString("lastName"));
+	            userData.put("role", rs.getString("role"));
 
-	        if (rs.next()) {
-	            user = new Users(
-	                rs.getString("userId"),
-	                rs.getString("password"),      
-	                rs.getString("role"),
-	                rs.getString("firstName"),
-	                rs.getString("lastName")
-	            );
+	            response.put("user", userData);
+	            response.put("message", "Login successful");
+	            return ResponseEntity.ok(response);
+	        } else {
+	            response.put("message", "Invalid userId or password");
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
+	        response.put("message", "Error occurred during login");
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 	    }
-	    return user;
 	}
+
+	
 
 }

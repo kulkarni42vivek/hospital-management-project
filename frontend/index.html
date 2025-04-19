@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login & Signup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CoreUI CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.0.0/dist/css/coreui.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f2f5;
+      }
+      .container {
+        max-width: 400px;
+        margin-top: 80px;
+      }
+      .card {
+        border-radius: 1rem;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+      .switch-link {
+        cursor: pointer;
+        color: #007bff;
+      }
+      .switch-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mx-auto">
+      <div class="card p-4">
+        <h2 class="text-center mb-4" id="form-title">Login</h2>
+
+        <!-- Login Form -->
+        <form id="login-form">
+          <div class="mb-3">
+            <label class="form-label">User ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="login-userId"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="login-password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            style="background-color: black"
+          >
+            Login
+          </button>
+          <p class="text-center mt-3">
+            <span style="color: gray">Don't have an account?</span>
+            <span
+              class="switch-link"
+              onclick="switchForm('signup')"
+              style="color: black"
+              >Sign Up</span
+            >
+          </p>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="signup-form" style="display: none">
+          <div class="mb-3">
+            <label class="form-label">User ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="signup-userId"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="signup-password"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="signup-firstName"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="signup-lastName"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            style="background-color: black"
+          >
+            Sign Up
+          </button>
+          <p class="text-center mt-3">
+            <span style="color: gray">Already have an account?</span>
+            <span
+              class="switch-link"
+              onclick="switchForm('login')"
+              style="color: black"
+              >Login</span
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS -->
+
+    <script src="./user.js"></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Hospital System</title>
+
+    <!-- CoreUI CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.0.0/dist/css/coreui.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .form-section {
+        display: none;
+      }
+      .form-section.active {
+        display: block;
+      }
+      .top-bar {
+        background-color: #343a40;
+        padding: 10px 20px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-buttons button {
+        margin-left: 10px;
+      }
+      .container {
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navbar -->
+    <div class="top-bar" style="background-color: black">
+      <h5>Hospital Dashboard</h5>
+      <div class="nav-buttons">
+        <button
+          class="btn btn-light"
+          id="btn-add-login"
+          style="background-color: white"
+        >
+          Logout
+        </button>
+        <button
+          class="btn btn-light"
+          id="btn-add-doctor"
+          style="background-color: white"
+        >
+          Add Doctor
+        </button>
+        <button
+          class="btn btn-light"
+          id="btn-create-appointment"
+          style="background-color: white"
+        >
+          Create Appointment
+        </button>
+      </div>
+    </div>
+
+    <!-- Forms Container -->
+    <div class="container">
+      <!-- Add Doctor Form -->
+      <div id="add-doctor-form" class="form-section">
+        <div class="card p-4 shadow rounded">
+          <h5>Add Doctor</h5>
+          <form id="doctorForm">
+            <div class="mb-3">
+              <label for="doctorId" class="form-label">Doctor ID</label>
+              <input type="text" class="form-control" id="doctorId" required />
+            </div>
+            <div class="mb-3">
+              <label for="doctorName" class="form-label">Doctor Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="doctorName"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="background-color: black"
+            >
+              Add Doctor
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Create Appointment Form -->
+      <div id="create-appointment-form" class="form-section active">
+        <div class="card p-4 shadow rounded">
+          <h5>Create Appointment</h5>
+          <form id="appointmentForm">
+            <div class="mb-3">
+              <label for="patientName" class="form-label">Patient Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="patientName"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="doctorIdSelect" class="form-label">Doctor</label>
+              <select class="form-select" id="doctorIdSelect" required>
+                <option value="">Select Doctor</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="appointmentDate" class="form-label">Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="appointmentDate"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="background-color: black"
+            >
+              Book Appointment
+            </button>
+          </form>
+        </div>
+        <!-- Appointment Table -->
+        <div class="card p-4 shadow rounded mt-4">
+          <h5>Appointment Records</h5>
+          <table class="table table-bordered" id="appointmentTable">
+            <thead>
+              <tr>
+                <th>Appointment ID</th>
+                <th>Patient Name</th>
+                <th>Doctor ID</th>
+                <th>Date</th>
+                <th>Prescription</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CoreUI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.0.0/dist/js/coreui.bundle.min.js"></script>
+
+    <script src="./admin-dashboard.js"></script>
+  </body>
+</html>
